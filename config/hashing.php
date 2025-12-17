@@ -4,51 +4,64 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Hash Driver
+    | Hashing Driver Padrão
     |--------------------------------------------------------------------------
     |
-    | This option controls the default hash driver that will be used to hash
-    | passwords for your application. By default, the bcrypt algorithm is
-    | used; however, you remain free to modify this option if you wish.
+    | Define qual algoritmo será usado para gerar hashes de senhas.
     |
-    | Supported: "bcrypt", "argon", "argon2id"
+    | Opções comuns:
+    | - bcrypt (padrão clássico, bem compatível)
+    | - argon  (Argon2id, recomendado em muitos cenários modernos)
+    |
+    | Dica: controle via .env usando HASH_DRIVER
     |
     */
-
-    'driver' => 'bcrypt',
+    'driver' => env('HASH_DRIVER', 'bcrypt'),
 
     /*
     |--------------------------------------------------------------------------
-    | Bcrypt Options
+    | Configurações do Bcrypt
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the configuration options that should be used when
-    | passwords are hashed using the Bcrypt algorithm. This will allow you
-    | to control the amount of time it takes to hash the given password.
+    | "rounds" controla o custo do hash. Quanto maior, mais seguro contra brute
+    | force, porém mais lento no login/cadastro.
+    |
+    | Valores típicos: 10, 12, 14... (depende do seu servidor).
+    |
+    | "verify" (Laravel 11/12) permite checar automaticamente se o hash precisa
+    | de "rehash" quando parâmetros mudam.
     |
     */
-
     'bcrypt' => [
         'rounds' => env('BCRYPT_ROUNDS', 12),
-        'verify' => true,
+
+        // Mantém verificação/rehash automático quando aplicável
+        'verify' => env('HASH_VERIFY', true),
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Argon Options
+    | Configurações do Argon2 (Argon2id)
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the configuration options that should be used when
-    | passwords are hashed using the Argon algorithm. These will allow you
-    | to control the amount of time it takes to hash the given password.
+    | Argon2id é uma opção moderna e muito forte, especialmente contra ataques
+    | com GPU/ASIC.
+    |
+    | - memory  : memória usada (KB). Mais memória => mais custoso para atacar
+    |            (e também mais pesado pro servidor).
+    | - threads : número de threads.
+    | - time    : número de iterações (tempo).
+    |
+    | Ajuste com cuidado conforme o desempenho do seu servidor.
     |
     */
-
     'argon' => [
-        'memory' => 65536,
-        'threads' => 1,
-        'time' => 4,
-        'verify' => true,
+        'memory' => env('ARGON_MEMORY', 65536),
+        'threads' => env('ARGON_THREADS', 1),
+        'time' => env('ARGON_TIME', 4),
+
+        // Mantém verificação/rehash automático quando aplicável
+        'verify' => env('HASH_VERIFY', true),
     ],
 
 ];

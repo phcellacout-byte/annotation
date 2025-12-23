@@ -20,6 +20,10 @@
       <x-button class="btn_fullwidth" type="submit">Logar
         <x-entypo-login />
       </x-button>
+
+      @if (session('status'))
+      <span class="txt_error">{{ session('status') }}</span>
+      @endif
     </form>
   </div>
 </section>

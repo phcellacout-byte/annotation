@@ -51,6 +51,69 @@ header div.head_right a button.btn_login {
   margin-left:5px;
 }
 
+header div.head_right div.menu_profile{
+    position: relative;
+}
+
+ div.menu_profile div.user_picture{
+    background: var(--a-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--f-color);
+    box-shadow: 0px 3px 6px var(--f-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: var(--d-color);
+    cursor: pointer;
+}
+
+header div.head_right nav,
+header div.head_right nav *{
+  text-align: left;
+}
+
+header div.head_right  nav{
+    background: var(--b-color);
+    position: absolute;
+    right: 12px;
+    top: 65px;
+    width: 175px;
+    border-radius: 5px;
+    border: 1px solid var(--f-color);
+    box-shadow:  0px 3px 6px var(--g-color);
+    display: none;
+}
+
+header div.head_right:hover nav{
+   display:block;
+}
+
+div.head_right nav div.user_infos{
+    padding: 10px 15px;
+    color: var(--e-color);
+    border-bottom: 1px solid var(--g-color);
+}
+
+div.head_right nav ul {
+   list-style-type: none;
+   padding-bottom: 5px;
+}
+
+div.head_right nav li a{
+    display: block;
+    padding: 10px 15px;
+    color: var(--d-color);
+    white-space: nowrap;
+
+}
+
+div.head_right nav ul li a:hover{
+    background: var(--a-color);
+}
+
 button{
     border: 1px solid var(--c-color);
     border-radius: 5px;
@@ -192,13 +255,19 @@ p.field_error{
     margin-bottom: 5px;
 }
 
-div.form_right form span.txt_success{
+div.form_right form span.txt_success,
+div.form_right form span.txt_error{
     color: var(--c-color);
     font-size: 16px;
     text-align: center;
     margin-top: 15px;
     display: block;
 }
+
+div.form_right form span.txt_error{
+    color: var(--h-color);
+}
+
 
 div.form_right form span{
     color: var(--e-color);
